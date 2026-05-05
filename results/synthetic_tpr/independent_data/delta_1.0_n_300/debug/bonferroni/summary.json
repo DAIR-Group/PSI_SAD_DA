@@ -1,0 +1,21 @@
+{
+  "method": "bonferroni",
+  "metric_name": "tpr",
+  "n_attempted": 500,
+  "n_pvalues": 391,
+  "n_missing": 109,
+  "missing_rate": 0.218,
+  "n_rejections": 0,
+  "tpr": 0.0,
+  "tpr_se": null,
+  "conditional_tpr": 0.0,
+  "conditional_tpr_se": null,
+  "rate_denominator": "pvalues",
+  "uncertainty_source": "fixed_model_resampling_dependent",
+  "ks_statistic": 1.0,
+  "ks_pvalue": 0.0,
+  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\independent_data\\delta_1.0_n_300\\debug\\bonferroni\\histogram.png",
+  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\independent_data\\delta_1.0_n_300\\debug\\bonferroni\\qq_plot.png",
+  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\independent_data\\delta_1.0_n_300\\debug\\bonferroni\\calibration_plot.png",
+  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\independent_data\\delta_1.0_n_300\\debug\\bonferroni\\calibration_curve.json"
+}

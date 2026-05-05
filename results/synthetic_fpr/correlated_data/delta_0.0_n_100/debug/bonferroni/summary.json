@@ -1,0 +1,21 @@
+{
+  "method": "bonferroni",
+  "metric_name": "fpr",
+  "n_attempted": 500,
+  "n_pvalues": 490,
+  "n_missing": 10,
+  "missing_rate": 0.02,
+  "n_rejections": 0,
+  "fpr": 0.0,
+  "fpr_se": null,
+  "conditional_fpr": 0.0,
+  "conditional_fpr_se": null,
+  "rate_denominator": "pvalues",
+  "uncertainty_source": "fixed_model_resampling_dependent",
+  "ks_statistic": 1.0,
+  "ks_pvalue": 0.0,
+  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\bonferroni\\histogram.png",
+  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\bonferroni\\qq_plot.png",
+  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\bonferroni\\calibration_plot.png",
+  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\bonferroni\\calibration_curve.json"
+}

@@ -1,0 +1,21 @@
+{
+  "method": "oc",
+  "metric_name": "tpr",
+  "n_attempted": 500,
+  "n_pvalues": 389,
+  "n_missing": 111,
+  "missing_rate": 0.222,
+  "n_rejections": 19,
+  "tpr": 0.04884318766066838,
+  "tpr_se": null,
+  "conditional_tpr": 0.04884318766066838,
+  "conditional_tpr_se": null,
+  "rate_denominator": "pvalues",
+  "uncertainty_source": "fixed_model_resampling_dependent",
+  "ks_statistic": 0.03021951077364393,
+  "ks_pvalue": 0.8586654943254386,
+  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\correlated_data\\delta_1.0_n_300\\debug\\oc\\histogram.png",
+  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\correlated_data\\delta_1.0_n_300\\debug\\oc\\qq_plot.png",
+  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\correlated_data\\delta_1.0_n_300\\debug\\oc\\calibration_plot.png",
+  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_tpr\\correlated_data\\delta_1.0_n_300\\debug\\oc\\calibration_curve.json"
+}

@@ -1,0 +1,402 @@
+{
+  "model_type": "da_deepsad",
+  "da_enabled": true,
+  "raw_input_dim": 10,
+  "feature_dim_after_da": 10,
+  "h_dims": [
+    64,
+    32
+  ],
+  "rep_dim": 8,
+  "detector_training_input_mode": "source_plus_target_after_da",
+  "da": {
+    "generator_hidden_dims": [
+      64,
+      32,
+      10
+    ],
+    "critic_hidden_dims": [
+      64,
+      32,
+      16
+    ],
+    "gamma": 10.0,
+    "lr_generator": 0.0005,
+    "lr_critic": 0.0005,
+    "num_epochs": 50,
+    "critic_steps": 5,
+    "batch_size": 128
+  },
+  "da_history": [
+    {
+      "epoch": 1,
+      "wasserstein_distance": -0.07035564468242228,
+      "gradient_penalty": 0.6542508415877819,
+      "generator_loss": -0.07035564468242228
+    },
+    {
+      "epoch": 2,
+      "wasserstein_distance": -0.6258169002830982,
+      "gradient_penalty": 0.29498644499108195,
+      "generator_loss": -0.6258169002830982
+    },
+    {
+      "epoch": 3,
+      "wasserstein_distance": -1.2765084132552147,
+      "gradient_penalty": 0.23677594307810068,
+      "generator_loss": -1.2765084132552147
+    },
+    {
+      "epoch": 4,
+      "wasserstein_distance": 0.08554592728614807,
+      "gradient_penalty": 0.30570984724909067,
+      "generator_loss": 0.08554592728614807
+    },
+    {
+      "epoch": 5,
+      "wasserstein_distance": 1.7516112346202135,
+      "gradient_penalty": 0.2760403600987047,
+      "generator_loss": 1.7516112346202135
+    },
+    {
+      "epoch": 6,
+      "wasserstein_distance": 3.408808011561632,
+      "gradient_penalty": 0.026498509032535367,
+      "generator_loss": 3.408808011561632
+    },
+    {
+      "epoch": 7,
+      "wasserstein_distance": 0.5591063071042299,
+      "gradient_penalty": 0.003030428502825089,
+      "generator_loss": 0.5591063071042299
+    },
+    {
+      "epoch": 8,
+      "wasserstein_distance": 0.020465988665819168,
+      "gradient_penalty": 0.0021846360505151097,
+      "generator_loss": 0.020465988665819168
+    },
+    {
+      "epoch": 9,
+      "wasserstein_distance": 0.011334208771586418,
+      "gradient_penalty": 0.007095954701071605,
+      "generator_loss": 0.011334208771586418
+    },
+    {
+      "epoch": 10,
+      "wasserstein_distance": 0.3660179600119591,
+      "gradient_penalty": 0.0028335145016171737,
+      "generator_loss": 0.3660179600119591
+    },
+    {
+      "epoch": 11,
+      "wasserstein_distance": 0.15095196291804314,
+      "gradient_penalty": 0.0011021027764854807,
+      "generator_loss": 0.15095196291804314
+    },
+    {
+      "epoch": 12,
+      "wasserstein_distance": 0.1022273376584053,
+      "gradient_penalty": 0.0024504744724254124,
+      "generator_loss": 0.1022273376584053
+    },
+    {
+      "epoch": 13,
+      "wasserstein_distance": 0.1709410697221756,
+      "gradient_penalty": 0.00047554117963954923,
+      "generator_loss": 0.1709410697221756
+    },
+    {
+      "epoch": 14,
+      "wasserstein_distance": 0.19472986459732056,
+      "gradient_penalty": 0.0023844732409088465,
+      "generator_loss": 0.19472986459732056
+    },
+    {
+      "epoch": 15,
+      "wasserstein_distance": 0.10030928999185562,
+      "gradient_penalty": 0.0008072431960499671,
+      "generator_loss": 0.10030928999185562
+    },
+    {
+      "epoch": 16,
+      "wasserstein_distance": 0.17333495616912842,
+      "gradient_penalty": 0.0005352965208658134,
+      "generator_loss": 0.17333495616912842
+    },
+    {
+      "epoch": 17,
+      "wasserstein_distance": 0.21504227817058563,
+      "gradient_penalty": 0.0025371530864504166,
+      "generator_loss": 0.21504227817058563
+    },
+    {
+      "epoch": 18,
+      "wasserstein_distance": 0.11765024438500404,
+      "gradient_penalty": 0.00029623765271935554,
+      "generator_loss": 0.11765024438500404
+    },
+    {
+      "epoch": 19,
+      "wasserstein_distance": 0.20405740290880203,
+      "gradient_penalty": 0.0007460549636562064,
+      "generator_loss": 0.20405740290880203
+    },
+    {
+      "epoch": 20,
+      "wasserstein_distance": 0.02188960835337639,
+      "gradient_penalty": 0.0021213365366747894,
+      "generator_loss": 0.02188960835337639
+    },
+    {
+      "epoch": 21,
+      "wasserstein_distance": 0.20646043866872787,
+      "gradient_penalty": 0.0005360408422347973,
+      "generator_loss": 0.20646043866872787
+    },
+    {
+      "epoch": 22,
+      "wasserstein_distance": 0.08453160524368286,
+      "gradient_penalty": 0.00011756039430110832,
+      "generator_loss": 0.08453160524368286
+    },
+    {
+      "epoch": 23,
+      "wasserstein_distance": 0.03182654827833176,
+      "gradient_penalty": 0.0010330711843380413,
+      "generator_loss": 0.03182654827833176
+    },
+    {
+      "epoch": 24,
+      "wasserstein_distance": 0.2242671102285385,
+      "gradient_penalty": 0.0006693016102872207,
+      "generator_loss": 0.2242671102285385
+    },
+    {
+      "epoch": 25,
+      "wasserstein_distance": 0.036440422758460045,
+      "gradient_penalty": 0.002444118012135732,
+      "generator_loss": 0.036440422758460045
+    },
+    {
+      "epoch": 26,
+      "wasserstein_distance": 0.09440745040774345,
+      "gradient_penalty": 0.000829125343443593,
+      "generator_loss": 0.09440745040774345
+    },
+    {
+      "epoch": 27,
+      "wasserstein_distance": 0.05159437167458236,
+      "gradient_penalty": 0.0004988154246348131,
+      "generator_loss": 0.05159437167458236
+    },
+    {
+      "epoch": 28,
+      "wasserstein_distance": 0.1521867965348065,
+      "gradient_penalty": 0.0011001413417943695,
+      "generator_loss": 0.1521867965348065
+    },
+    {
+      "epoch": 29,
+      "wasserstein_distance": 0.04897273704409599,
+      "gradient_penalty": 0.0007249452551150171,
+      "generator_loss": 0.04897273704409599
+    },
+    {
+      "epoch": 30,
+      "wasserstein_distance": 0.0721232146024704,
+      "gradient_penalty": 0.00025153848093850684,
+      "generator_loss": 0.0721232146024704
+    },
+    {
+      "epoch": 31,
+      "wasserstein_distance": 0.07173331174999475,
+      "gradient_penalty": 0.00024741388341453785,
+      "generator_loss": 0.07173331174999475
+    },
+    {
+      "epoch": 32,
+      "wasserstein_distance": 0.06572526972740889,
+      "gradient_penalty": 0.0004658509901673824,
+      "generator_loss": 0.06572526972740889
+    },
+    {
+      "epoch": 33,
+      "wasserstein_distance": 0.04663602262735367,
+      "gradient_penalty": 0.0003293550230409892,
+      "generator_loss": 0.04663602262735367
+    },
+    {
+      "epoch": 34,
+      "wasserstein_distance": 0.09345841780304909,
+      "gradient_penalty": 0.00037831257509424177,
+      "generator_loss": 0.09345841780304909
+    },
+    {
+      "epoch": 35,
+      "wasserstein_distance": 0.04505806416273117,
+      "gradient_penalty": 0.0001708727384084341,
+      "generator_loss": 0.04505806416273117
+    },
+    {
+      "epoch": 36,
+      "wasserstein_distance": 0.015757586807012558,
+      "gradient_penalty": 5.384546514619615e-05,
+      "generator_loss": 0.015757586807012558
+    },
+    {
+      "epoch": 37,
+      "wasserstein_distance": 0.04091576347127557,
+      "gradient_penalty": 0.0005371998631744646,
+      "generator_loss": 0.04091576347127557
+    },
+    {
+      "epoch": 38,
+      "wasserstein_distance": 0.09764923714101315,
+      "gradient_penalty": 0.00034951411061001636,
+      "generator_loss": 0.09764923714101315
+    },
+    {
+      "epoch": 39,
+      "wasserstein_distance": 0.02812856063246727,
+      "gradient_penalty": 4.252410749927549e-05,
+      "generator_loss": 0.02812856063246727
+    },
+    {
+      "epoch": 40,
+      "wasserstein_distance": -0.0031332187354564667,
+      "gradient_penalty": 0.0011202442850333227,
+      "generator_loss": -0.0031332187354564667
+    },
+    {
+      "epoch": 41,
+      "wasserstein_distance": 0.10695397760719061,
+      "gradient_penalty": 0.0006681126207581656,
+      "generator_loss": 0.10695397760719061
+    },
+    {
+      "epoch": 42,
+      "wasserstein_distance": 0.07256683520972729,
+      "gradient_penalty": 0.0005955452843409148,
+      "generator_loss": 0.07256683520972729
+    },
+    {
+      "epoch": 43,
+      "wasserstein_distance": 0.03998198080807924,
+      "gradient_penalty": 0.000257490343074096,
+      "generator_loss": 0.03998198080807924
+    },
+    {
+      "epoch": 44,
+      "wasserstein_distance": 0.03018995374441147,
+      "gradient_penalty": 0.00016229308494075667,
+      "generator_loss": 0.03018995374441147
+    },
+    {
+      "epoch": 45,
+      "wasserstein_distance": 0.02893379982560873,
+      "gradient_penalty": 0.0005706256361008855,
+      "generator_loss": 0.02893379982560873
+    },
+    {
+      "epoch": 46,
+      "wasserstein_distance": 0.07076865714043379,
+      "gradient_penalty": 0.0006368559502334392,
+      "generator_loss": 0.07076865714043379
+    },
+    {
+      "epoch": 47,
+      "wasserstein_distance": 0.014864671975374222,
+      "gradient_penalty": 0.00021010803666854372,
+      "generator_loss": 0.014864671975374222
+    },
+    {
+      "epoch": 48,
+      "wasserstein_distance": 0.05531224561855197,
+      "gradient_penalty": 0.00031579122151015326,
+      "generator_loss": 0.05531224561855197
+    },
+    {
+      "epoch": 49,
+      "wasserstein_distance": 0.010774014750495553,
+      "gradient_penalty": 0.00028248915873518854,
+      "generator_loss": 0.010774014750495553
+    },
+    {
+      "epoch": 50,
+      "wasserstein_distance": 0.03404824435710907,
+      "gradient_penalty": 0.00032660896727065847,
+      "generator_loss": 0.03404824435710907
+    }
+  ],
+  "n_target_train": 1800,
+  "n_detector_train_total": 5790,
+  "n_source_train": 4200,
+  "source_training_label_policy": "normal_source_points_unlabeled_support_source_anomalies_da_only",
+  "n_source_train_true_normal": 3990,
+  "n_source_train_true_anomaly": 210,
+  "synthetic_split": {
+    "synthetic_data_layout": "source_target_train_only_v1",
+    "train_has_reference_split": false,
+    "source_target_ratio": {
+      "source": 0.7,
+      "target": 0.3
+    },
+    "source_domain": {
+      "n": 4200,
+      "mu": 1.0,
+      "mean_shift_from_target": 1.0,
+      "delta": 2.0,
+      "anomaly_rate": 0.05,
+      "rho": 0.0,
+      "covariance_noise_std": 0.0,
+      "label_policy": "source_labels_available_for_detector_filtering",
+      "n_anomaly": 210,
+      "n_normal": 3990
+    },
+    "target_domain": {
+      "pool_n": 1800,
+      "train_n": 1800,
+      "reference_n": 0,
+      "mu": 0.0,
+      "delta": 2.0,
+      "anomaly_rate": 0.05,
+      "rho": 0.0,
+      "known_label_rate": 0.1,
+      "n_train_known_labeled": 180,
+      "n_train_known_normal": 171,
+      "n_train_known_anomaly": 9,
+      "n_train_unlabeled": 1620,
+      "n_train_true_normal": 1710,
+      "n_train_true_anomaly": 90,
+      "reference_policy": "not_used_in_train_generated_at_testing"
+    },
+    "split_seed": 0,
+    "source_seed": 10000
+  },
+  "n_target_reference": 0,
+  "n_target_train_known_labeled": 180,
+  "n_target_train_unlabeled": 1620,
+  "model_name": "deepsad_da_delta2_independent",
+  "feature_dim": 10,
+  "mu": 0.0,
+  "target_mu": 0.0,
+  "source_mu": 1.0,
+  "delta": 2.0,
+  "n_train": 6000,
+  "rho": 0.0,
+  "target_rho": 0.0,
+  "source_rho": 0.0,
+  "n_reference": null,
+  "covariance_path": "c:\\Repository Github\\si_semi_ad_v2\\covariances\\deepsad_da_delta2_independent_cov.npy",
+  "covariance_source": "synthetic_theoretical_target_covariance",
+  "target_covariance_path": "c:\\Repository Github\\si_semi_ad_v2\\covariances\\deepsad_da_delta2_independent_cov.npy",
+  "target_covariance_source": "synthetic_theoretical_target_covariance",
+  "source_covariance_path": "c:\\Repository Github\\si_semi_ad_v2\\covariances\\deepsad_da_delta2_independent_source_cov.npy",
+  "source_covariance_source": "synthetic_theoretical_source_covariance",
+  "source_data_path": "c:\\Repository Github\\si_semi_ad_v2\\models\\deepsad_da_delta2_independent_source.npy",
+  "source_data_source": "source_training_split",
+  "reference_mean_path": null,
+  "reference_mean_source": null,
+  "artifact_version": "2026-04-si-semi-ad-da-v2-exact-md"
+}

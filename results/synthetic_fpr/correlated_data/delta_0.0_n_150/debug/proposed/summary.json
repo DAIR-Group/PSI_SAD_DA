@@ -1,0 +1,21 @@
+{
+  "method": "proposed",
+  "metric_name": "fpr",
+  "n_attempted": 500,
+  "n_pvalues": 493,
+  "n_missing": 7,
+  "missing_rate": 0.014,
+  "n_rejections": 24,
+  "fpr": 0.0486815415821501,
+  "fpr_se": null,
+  "conditional_fpr": 0.0486815415821501,
+  "conditional_fpr_se": null,
+  "rate_denominator": "pvalues",
+  "uncertainty_source": "fixed_model_resampling_dependent",
+  "ks_statistic": 0.039211759864040574,
+  "ks_pvalue": 0.4237316924571144,
+  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_150\\debug\\proposed\\histogram.png",
+  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_150\\debug\\proposed\\qq_plot.png",
+  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_150\\debug\\proposed\\calibration_plot.png",
+  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_150\\debug\\proposed\\calibration_curve.json"
+}
