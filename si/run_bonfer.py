@@ -46,7 +46,7 @@ def run(
 
     if test_index_class not in {"normal", "anomaly"}:
         raise ValueError("test_index_class must be either 'normal' or 'anomaly'.")
-    n_total, n_source, n_target = resolve_source_target_test_sizes(
+    _, n_source, n_target = resolve_source_target_test_sizes(
         n,
         source_test_size=source_test_size,
         target_test_size=target_test_size,
@@ -138,10 +138,7 @@ def run(
     z = mp.mpf(path["test_statistic"]) / mp.sqrt(mp.mpf(path["etajTsigmaetaj"][0][0]))
     raw_p_value = mp.erfc(abs(z) / mp.sqrt(2))
 
-    sign_factor = mp.power(2, d + 1)
-    top_k_set_factor = mp.binomial(n_total, top_k)
-    selected_index_factor = mp.mpf(top_k)
-    bonferroni_factor = sign_factor * top_k_set_factor * selected_index_factor
+    bonferroni_factor = mp.power(2, d + 1)
     p_value = min(mp.mpf(1), raw_p_value * bonferroni_factor)
 
     print(
