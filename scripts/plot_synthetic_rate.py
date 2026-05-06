@@ -11,6 +11,8 @@ plt.rcParams.update({"font.size": 14})
 
 DISPLAY_NAMES = {
     "proposed": "PSI-SAD-DA",
+    "wo_dnn": "w/o DNN",
+    "wo_j_in_o": "w/o j in O",
     "oc": "PSI-SAD-DA-oc",
     "bonferroni": "Bonferroni",
     "naive": "Naive",
@@ -48,7 +50,7 @@ def main():
     parser.add_argument("--delta-list", type=str, default=None, help="Comma-separated delta list when --x-axis=delta.")
     parser.add_argument("--alpha", type=float, default=0.05)
     parser.add_argument("--metric-name", type=str, required=True, choices=["fpr", "tpr"])
-    parser.add_argument("--methods", type=str, default="proposed,oc,bonferroni,naive,no_inference")
+    parser.add_argument("--methods", type=str, default="proposed,wo_dnn,wo_j_in_o,oc,bonferroni,naive,no_inference")
     parser.add_argument("--x-label", type=str, default=None)
     parser.add_argument("--output", type=str, default=None)
     args = parser.parse_args()

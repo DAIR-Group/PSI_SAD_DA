@@ -12,6 +12,20 @@ from scipy.stats import kstest
 METHOD_ALIASES = {
     "proposed": "proposed",
     "normal": "proposed",
+    "wo_dnn": "wo_dnn",
+    "wo-dnn": "wo_dnn",
+    "without_dnn": "wo_dnn",
+    "without-dnn": "wo_dnn",
+    "without dnn": "wo_dnn",
+    "w/o_dnn": "wo_dnn",
+    "w/o dnn": "wo_dnn",
+    "wo_j_in_o": "wo_j_in_o",
+    "wo-j-in-o": "wo_j_in_o",
+    "without_j_in_o": "wo_j_in_o",
+    "without-j-in-o": "wo_j_in_o",
+    "without j in o": "wo_j_in_o",
+    "w/o_j_in_o": "wo_j_in_o",
+    "w/o j in o": "wo_j_in_o",
     "oc": "oc",
     "overconditioning": "oc",
     "over_conditioning": "oc",
@@ -24,13 +38,23 @@ METHOD_ALIASES = {
 
 DISPLAY_NAMES = {
     "proposed": "Proposed",
+    "wo_dnn": "w/o DNN",
+    "wo_j_in_o": "w/o j in O",
     "oc": "Over Conditioning",
     "bonferroni": "Bonferroni",
     "naive": "Naive",
     "no_inference": "No-Inference",
 }
 
-SUPPORTED_METHODS = ("proposed", "oc", "bonferroni", "naive", "no_inference")
+SUPPORTED_METHODS = (
+    "proposed",
+    "wo_dnn",
+    "wo_j_in_o",
+    "oc",
+    "bonferroni",
+    "naive",
+    "no_inference",
+)
 
 
 def canonicalize_method_name(method_name: str) -> str:

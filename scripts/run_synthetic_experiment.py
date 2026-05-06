@@ -28,9 +28,13 @@ run_oc = importlib.import_module("si.run_oc")
 run_bonfer = importlib.import_module("si.run_bonfer")
 run_naive = importlib.import_module("si.run_naive")
 run_no_inference = importlib.import_module("si.run_no_inference")
+run_wo_dnn = importlib.import_module("si.wo_DNN.run")
+run_wo_j_in_o = importlib.import_module("si.wo_j_in_O.run")
 
 METHOD_RUNNERS = {
     "proposed": proposed_run.run_one,
+    "wo_dnn": run_wo_dnn.run,
+    "wo_j_in_o": run_wo_j_in_o.run,
     "oc": run_oc.run,
     "bonferroni": run_bonfer.run,
     "naive": run_naive.run,

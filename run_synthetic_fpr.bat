@@ -35,7 +35,7 @@ set "DELTA=0.0"
 set "ANOMALY_RATE=0.00"
 set "REFERENCE_SIZE=200"
 set "ALPHA=0.05"
-set "METHODS=proposed,oc,bonferroni,naive"
+set "METHODS=proposed,wo_dnn,wo_j_in_o,oc,bonferroni,naive"
 set "SOURCE_N_LIST=100 150 200 250"
 set "SOURCE_N_CSV=100,150,200,250"
 set "TARGET_TEST_SIZE=50"
@@ -163,7 +163,7 @@ python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
   --x-label "Source test size (target=50)" ^
   --alpha %ALPHA% ^
   --metric-name %METRIC_NAME% ^
-  --methods proposed,oc,bonferroni,naive,no_inference ^
+  --methods proposed,wo_dnn,wo_j_in_o,oc,bonferroni,naive,no_inference ^
   --output "%RESULTS_DIR%\final_fpr_plot.pdf"
 
 if errorlevel 1 (
