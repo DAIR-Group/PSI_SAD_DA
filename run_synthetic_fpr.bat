@@ -30,12 +30,12 @@ set "BATCH_SIZE=128"
 set "TRAIN_DELTA=2.0"
 set "TRAIN_ANOMALY_RATE=0.05"
 set "KNOWN_LABEL_RATE=0.1"
-set "N_SEEDS=1000"
+set "N_SEEDS=500"
 set "DELTA=0.0"
 set "ANOMALY_RATE=0.00"
 set "REFERENCE_SIZE=200"
 set "ALPHA=0.05"
-set "METHODS=proposed,wo_dnn,wo_j_in_o,oc,bonferroni,naive"
+set "METHODS=proposed,wo_ad,wo_da,oc,bonferroni,naive"
 set "SOURCE_N_LIST=100 150 200 250"
 set "SOURCE_N_CSV=100,150,200,250"
 set "TARGET_TEST_SIZE=50"
@@ -160,14 +160,30 @@ python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
   --x-axis n ^
   --delta %DELTA% ^
   --n-list %SOURCE_N_CSV% ^
-  --x-label "Source test size (target=50)" ^
+  --x-label "Sample Size" ^
   --alpha %ALPHA% ^
   --metric-name %METRIC_NAME% ^
-  --methods proposed,wo_dnn,wo_j_in_o,oc,bonferroni,naive,no_inference ^
+  --methods proposed,wo_ad,wo_da,oc,bonferroni,naive ^
   --output "%RESULTS_DIR%\final_fpr_plot.pdf"
 
 if errorlevel 1 (
   echo Synthetic FPR plotting failed for %EXPERIMENT_NAME%.
+  exit /b 1
+)
+
+python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
+  --results-dir "%RESULTS_DIR%" ^
+  --x-axis n ^
+  --delta %DELTA% ^
+  --n-list %SOURCE_N_CSV% ^
+  --x-label "Sample Size" ^
+  --alpha %ALPHA% ^
+  --metric-name %METRIC_NAME% ^
+  --methods proposed,wo_ad,wo_da,oc,bonferroni,naive ^
+  --output "%RESULTS_DIR%\final_fpr_plot.png"
+
+if errorlevel 1 (
+  echo Synthetic FPR PNG plotting failed for %EXPERIMENT_NAME%.
   exit /b 1
 )
 

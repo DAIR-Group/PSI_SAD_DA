@@ -2,6 +2,7 @@ import numpy as np
 import torch
 
 from ..detection import get_j_in_topk_intervals
+from ..dnn.dnn import get_model_intervals as get_model_intervals_cpu
 from ..dnn.util import parse_model
 from ..util import (
     build_initial_sign_interval,
@@ -81,6 +82,21 @@ def get_observed_model_intervals(model, intervals, z_obs):
         elif layer_type == "BatchNorm1d":
             intervals = apply_observed_batchnorm1d_layer(intervals, params)
 
+    return sorted(intervals, key=lambda x: x[0])
+
+def get_da_component(model):
+    return getattr(model, "generator", None)
+
+
+def get_ad_component(model):
+    return getattr(model, "encoder", model)
+
+
+def get_model_intervals_wo_da_conditioning(model, intervals, z_obs):
+    da_component = get_da_component(model)
+    if da_component is not None:
+        intervals = get_observed_model_intervals(da_component, intervals, z_obs)
+    intervals = get_model_intervals_cpu(get_ad_component(model), intervals)
     return sorted(intervals, key=lambda x: x[0])
 
 
@@ -177,6 +193,7 @@ def run(
         raise ValueError("true_y contains invalid labels; expected values in {-1,1}.")
 
     X_detect = np.vstack([X_source, X_target])
+    deepsad_c = np.asarray(deepsad_c, dtype=np.float64)
     with torch.no_grad():
         x_tensor = torch.tensor(X_detect, dtype=torch.float32, device=model_device)
         embeddings = deepsad_encoder(x_tensor).detach().cpu().numpy()
@@ -219,7 +236,9 @@ def run(
 
     a_detect = np.vstack([path["a_source"], path["a_test"]])
     b_detect = np.vstack([path["b_source"], path["b_test"]])
-    intervals = get_observed_model_intervals(
+
+
+    intervals = get_model_intervals_wo_da_conditioning(
         deepsad_encoder,
         [(left, right, a_detect, b_detect)],
         z_obs=path["test_statistic"],

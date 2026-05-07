@@ -28,13 +28,13 @@ run_oc = importlib.import_module("si.run_oc")
 run_bonfer = importlib.import_module("si.run_bonfer")
 run_naive = importlib.import_module("si.run_naive")
 run_no_inference = importlib.import_module("si.run_no_inference")
-run_wo_dnn = importlib.import_module("si.wo_DNN.run")
-run_wo_j_in_o = importlib.import_module("si.wo_j_in_O.run")
+run_wo_ad = importlib.import_module("si.wo_AD.run")
+run_wo_da = importlib.import_module("si.wo_DA.run")
 
 METHOD_RUNNERS = {
     "proposed": proposed_run.run_one,
-    "wo_dnn": run_wo_dnn.run,
-    "wo_j_in_o": run_wo_j_in_o.run,
+    "wo_ad": run_wo_ad.run,
+    "wo_da": run_wo_da.run,
     "oc": run_oc.run,
     "bonferroni": run_bonfer.run,
     "naive": run_naive.run,
@@ -178,6 +178,13 @@ def main():
     parser.add_argument("--test-index-class", type=str, default="normal", choices=["normal", "anomaly"])
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda", "dnn_para"])
     parser.add_argument("--allow-artifact-fallback", action="store_true")
+    parser.add_argument(
+        "--selection-event",
+        type=str,
+        default="j-in-o",
+        choices=["j-in-o", "o-equal-oobs"],
+        help="Selection event for the proposed SI method.",
+    )
     args = parser.parse_args()
 
     if int(args.reference_size) <= 0:
@@ -272,29 +279,32 @@ def main():
 
             runner = METHOD_RUNNERS[method]
             method_start = time.time()
-            method_output = runner(
-                seed=seed,
-                delta=args.delta,
-                n=args.n,
-                target_mu=target_mu,
-                source_mu=source_mu,
-                d=args.d,
-                anomaly_rate=args.anomaly_rate,
-                top_k_percent=args.top_k_percent,
-                deepsad_encoder=encoder,
-                deepsad_c=deepsad_c,
-                device=args.device,
-                Sigma=Sigma_target,
-                Sigma_target=Sigma_target,
-                Sigma_source=Sigma_source,
-                X_source_obs=X_source_obs,
-                target_rho=target_rho,
-                source_rho=source_rho,
-                reference_size=args.reference_size,
-                source_test_size=args.source_test_size,
-                target_test_size=args.target_test_size,
-                test_index_class=args.test_index_class,
-            )
+            runner_kwargs = {
+                "seed": seed,
+                "delta": args.delta,
+                "n": args.n,
+                "target_mu": target_mu,
+                "source_mu": source_mu,
+                "d": args.d,
+                "anomaly_rate": args.anomaly_rate,
+                "top_k_percent": args.top_k_percent,
+                "deepsad_encoder": encoder,
+                "deepsad_c": deepsad_c,
+                "device": args.device,
+                "Sigma": Sigma_target,
+                "Sigma_target": Sigma_target,
+                "Sigma_source": Sigma_source,
+                "X_source_obs": X_source_obs,
+                "target_rho": target_rho,
+                "source_rho": source_rho,
+                "reference_size": args.reference_size,
+                "source_test_size": args.source_test_size,
+                "target_test_size": args.target_test_size,
+                "test_index_class": args.test_index_class,
+            }
+            if method == "proposed":
+                runner_kwargs["selection_event"] = args.selection_event
+            method_output = runner(**runner_kwargs)
             per_method_runtime[method] += time.time() - method_start
             p_values_by_method[method].extend(normalize_method_output(method_output))
 
@@ -332,6 +342,7 @@ def main():
         "test_index_class": str(args.test_index_class),
         "alpha": float(args.alpha),
         "top_k_percent": float(args.top_k_percent),
+        "selection_event": str(args.selection_event),
         "device": str(resolved_device),
         "model_name": str(model_name),
         "model_dir": str(args.model_dir),

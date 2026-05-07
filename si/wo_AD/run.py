@@ -1,9 +1,9 @@
 import numpy as np
 import torch
 
+from ..detection import get_j_in_topk_intervals
 from ..dnn.dnn import get_model_intervals as get_model_intervals_cpu
-from ..dnn_gpu.dnn import get_model_intervals as get_model_intervals_gpu
-from ..dnn_para.dnn import get_model_intervals as get_model_intervals_para
+from ..dnn.util import parse_model
 from ..util import (
     build_initial_sign_interval,
     build_test_reference_contrast_path,
@@ -12,6 +12,93 @@ from ..util import (
     resolve_source_target_test_sizes,
     truncated_cdf,
 )
+
+
+def apply_observed_linear_layer(intervals, params):
+    W, bias = params
+    new_intervals = []
+    for left, right, a_curr, b_curr in intervals:
+        a_new = a_curr @ W
+        if bias is not None:
+            a_new = a_new + bias
+        b_new = b_curr @ W
+        new_intervals.append((left, right, a_new, b_new))
+    return new_intervals
+
+
+def apply_observed_relu_layer(intervals, z_obs):
+    new_intervals = []
+    for left, right, a_curr, b_curr in intervals:
+        pre_activation = a_curr + b_curr * float(z_obs)
+        active_mask = (pre_activation > 0.0).astype(np.float64)
+        new_intervals.append((left, right, a_curr * active_mask, b_curr * active_mask))
+    return new_intervals
+
+
+def apply_observed_leaky_relu_layer(intervals, params, z_obs):
+    alpha = float(params)
+    new_intervals = []
+    for left, right, a_curr, b_curr in intervals:
+        pre_activation = a_curr + b_curr * float(z_obs)
+        slopes = np.where(pre_activation > 0.0, 1.0, alpha)
+        new_intervals.append((left, right, a_curr * slopes, b_curr * slopes))
+    return new_intervals
+
+
+def apply_observed_batchnorm1d_layer(intervals, params):
+    gamma, beta, running_mean, running_var, bn_eps = params
+    new_intervals = []
+
+    if running_var is None or running_mean is None:
+        _, _, a0, _ = intervals[0]
+        feature_dim = int(a0.shape[1])
+        scale = np.ones(feature_dim, dtype=np.float64)
+    else:
+        scale = 1.0 / np.sqrt(running_var + bn_eps)
+
+    if gamma is not None:
+        scale = gamma * scale
+    shift = np.zeros_like(scale) if running_mean is None else -running_mean * scale
+    if beta is not None:
+        shift = shift + beta
+
+    for left, right, a_curr, b_curr in intervals:
+        a_new = scale * a_curr + shift
+        b_new = scale * b_curr
+        new_intervals.append((left, right, a_new, b_new))
+    return new_intervals
+
+
+def get_observed_model_intervals(model, intervals, z_obs):
+    layers = parse_model(model)
+
+    for layer_type, params in layers:
+        if layer_type == "Linear":
+            intervals = apply_observed_linear_layer(intervals, params)
+        elif layer_type == "ReLU":
+            intervals = apply_observed_relu_layer(intervals, z_obs)
+        elif layer_type == "LeakyReLU":
+            intervals = apply_observed_leaky_relu_layer(intervals, params, z_obs)
+        elif layer_type == "BatchNorm1d":
+            intervals = apply_observed_batchnorm1d_layer(intervals, params)
+
+    return sorted(intervals, key=lambda x: x[0])
+
+
+def get_da_component(model):
+    return getattr(model, "generator", None)
+
+
+def get_ad_component(model):
+    return getattr(model, "encoder", model)
+
+
+def get_model_intervals_wo_ad_conditioning(model, intervals, z_obs):
+    da_component = get_da_component(model)
+    if da_component is not None:
+        intervals = get_model_intervals_cpu(da_component, intervals)
+    intervals = get_observed_model_intervals(get_ad_component(model), intervals, z_obs)
+    return sorted(intervals, key=lambda x: x[0])
 
 
 def run(
@@ -107,6 +194,7 @@ def run(
         raise ValueError("true_y contains invalid labels; expected values in {-1,1}.")
 
     X_detect = np.vstack([X_source, X_target])
+    deepsad_c = np.asarray(deepsad_c, dtype=np.float64)
     with torch.no_grad():
         x_tensor = torch.tensor(X_detect, dtype=torch.float32, device=model_device)
         embeddings = deepsad_encoder(x_tensor).detach().cpu().numpy()
@@ -125,7 +213,6 @@ def run(
         return []
     j_global = int(np.random.choice(candidates))
     j_target = j_global - n_source
-    _ = j_global
 
     path = build_test_reference_contrast_path(
         X_test=X_target,
@@ -150,36 +237,18 @@ def run(
 
     a_detect = np.vstack([path["a_source"], path["a_test"]])
     b_detect = np.vstack([path["b_source"], path["b_test"]])
-    intervals = [(left, right, a_detect, b_detect)]
-    if requested_device == "dnn_para":
-        para_device = "cuda" if torch.cuda.is_available() else "cpu"
-        intervals = get_model_intervals_para(deepsad_encoder, intervals, para_device)
-    else:
-        use_cuda_dnn = model_device.type == "cuda"
-        if requested_device == "cpu":
-            use_cuda_dnn = False
-        elif requested_device == "cuda":
-            use_cuda_dnn = True
-        if use_cuda_dnn:
-            si_dtype = torch.float64
-            intervals_gpu = [
-                (
-                    left,
-                    right,
-                    torch.as_tensor(a_i, dtype=si_dtype, device=model_device),
-                    torch.as_tensor(b_i, dtype=si_dtype, device=model_device),
-                )
-                for left, right, a_i, b_i in intervals
-            ]
-            intervals_gpu = get_model_intervals_gpu(deepsad_encoder, intervals_gpu)
-            intervals = [
-                (left, right, a_i.detach().cpu().numpy(), b_i.detach().cpu().numpy())
-                for left, right, a_i, b_i in intervals_gpu
-            ]
-        else:
-            intervals = get_model_intervals_cpu(deepsad_encoder, intervals)
 
-    final_intervals = [(left_i, right_i, True) for left_i, right_i, _, _ in intervals]
+
+    intervals = get_model_intervals_wo_ad_conditioning(
+        deepsad_encoder,
+        [(left, right, a_detect, b_detect)],
+        z_obs=path["test_statistic"],
+    )
+    intervals = get_j_in_topk_intervals(
+        intervals, top_k_percent=top_k_percent, deepsad_c=deepsad_c, j=j_global
+    )
+
+    final_intervals = [(left_i, right_i, bool(Oz)) for left_i, right_i, Oz in intervals]
     cdf = truncated_cdf(0, path["sigma"], final_intervals, True, path["test_statistic"])
     if cdf is None:
         print(f"Warning: CDF computation failed for seed {seed}. Skipping this run.")
