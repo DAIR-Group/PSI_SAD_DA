@@ -56,16 +56,7 @@ Run:
 .\run_synthetic_fpr.bat
 ```
 
-This reproduces the false-positive-rate experiment for both covariance
-settings:
-
-- independent data: `rho=0.0`
-- correlated data: `rho=0.5`
-- source sample sizes: `100, 150, 200, 250`
-- target test size: `50`
-- anomaly rate during evaluation: `0.00`
-- number of random seeds: `500`
-- methods: `proposed`, `wo_ad`, `wo_da`, `oc`, `bonferroni`, `naive`
+This reproduces the false-positive-rate experiments.
 
 Outputs are written to:
 
@@ -91,17 +82,7 @@ Run:
 .\run_synthetic_tpr.bat
 ```
 
-This reproduces the true-positive-rate experiment for both covariance settings:
-
-- independent data: `rho=0.0`
-- correlated data: `rho=0.5`
-- total test size: `300`
-- source test size: `200`
-- target test size: `100`
-- anomaly shifts: `0.5, 1.0, 1.5, 2.0`
-- anomaly rate during evaluation: `0.05`
-- number of random seeds: `500`
-- methods: `proposed`, `oc`, `bonferroni`, `naive`
+This reproduces the true-positive-rate experiments.
 
 Outputs are written to:
 
