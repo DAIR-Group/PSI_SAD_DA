@@ -28,9 +28,7 @@ pip install -r requirements.txt
 
 ### Required Artifacts
 
-To reproduce the existing synthetic results without retraining the models, keep
-the following files in /models, /covariances.
-
+To reproduce the existing synthetic results without retraining the models, keep the required files in the /models and /covariances directories.
 
 ### Synthetic FPR
 
