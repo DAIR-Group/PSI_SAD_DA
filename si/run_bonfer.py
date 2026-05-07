@@ -138,7 +138,7 @@ def run(
     z = mp.mpf(path["test_statistic"]) / mp.sqrt(mp.mpf(path["etajTsigmaetaj"][0][0]))
     raw_p_value = mp.erfc(abs(z) / mp.sqrt(2))
 
-    bonferroni_factor = mp.power(2, d + 1)
+    bonferroni_factor = mp.mpf(n_target) * mp.power(2, d + 1)
     p_value = min(mp.mpf(1), raw_p_value * bonferroni_factor)
 
     print(

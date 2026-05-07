@@ -188,7 +188,7 @@ def load_working_model_artifacts(
         "metadata": metadata,
         "X_source": X_source,
         "Sigma_source": Sigma_source,
-        "Sigma_target": Sigma_target,
+        "Sigma_target": Sigma_target, 
         "Sigma_ref": Sigma_target,
     }
 

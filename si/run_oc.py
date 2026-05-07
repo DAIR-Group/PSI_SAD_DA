@@ -3,7 +3,7 @@ import time
 import numpy as np
 import torch
 
-from .detection import get_j_in_topk_intervals_v2
+from .detection import get_j_in_topk_intervals
 from .dnn.dnn import get_model_intervals as get_model_intervals_cpu
 from .dnn_gpu.dnn import get_model_intervals as get_model_intervals_gpu
 from .dnn_para.dnn import get_model_intervals as get_model_intervals_para
@@ -188,7 +188,7 @@ def run(
             filtered_intervals.append((left, right, a_i, b_i))
     intervals = filtered_intervals
 
-    intervals = get_j_in_topk_intervals_v2(
+    intervals = get_j_in_topk_intervals(
         intervals, top_k_percent=top_k_percent, deepsad_c=deepsad_c, j=j_global
     )
     filtered_intervals = []

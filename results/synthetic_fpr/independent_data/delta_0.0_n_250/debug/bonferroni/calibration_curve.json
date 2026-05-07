@@ -36,7 +36,7 @@
   },
   {
     "alpha": 0.5,
-    "empirical_rejection": 0.0,
-    "conditional_rejection": 0.0
+    "empirical_rejection": 0.002,
+    "conditional_rejection": 0.00202020202020202
   }
 ]

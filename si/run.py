@@ -1,9 +1,11 @@
-import time
-
 import numpy as np
 import torch
 
-from .detection import anomaly_detection, get_ad_intervals, get_j_in_topk_intervals_v2
+from .detection import (
+    anomaly_detection,
+    get_j_in_topk_intervals,
+    get_o_equal_oobs_intervals,
+)
 from .dnn.dnn import get_model_intervals as get_model_intervals_cpu
 from .dnn_gpu.dnn import get_model_intervals as get_model_intervals_gpu
 from .dnn_para.dnn import get_model_intervals as get_model_intervals_para
@@ -38,9 +40,12 @@ from .util import (
 #     X_source_obs: np.ndarray = None,
 #     rho: float = 0.0,
 #     reference_size: int = 100,
+#     selection_event: str = "j-in-o",
 # ):
 #     _ = top_k_normal_percent, Sigma_source, Sigma_ref, X_source_obs
-#     start = time.time()
+#     selection_event = str(selection_event).strip().lower().replace("_", "-")
+#     if selection_event not in {"j-in-o", "o-equal-oobs"}:
+#         raise ValueError("selection_event must be either 'j-in-o' or 'o-equal-oobs'.")
 #     np.random.seed(seed)
 #     torch.manual_seed(seed)
 
@@ -151,9 +156,28 @@ from .util import (
 #             else:
 #                 intervals = get_model_intervals_cpu(deepsad_encoder, intervals)
 
-#         intervals = get_ad_intervals(intervals, top_k_percent=top_k_percent, deepsad_c=deepsad_c)
-#         final_intervals = [(left, right, j in sorted(Oz)) for left, right, Oz in intervals]
-#         cdf = truncated_cdf(0, np.sqrt(etajTsigmaetaj[0][0]), final_intervals, j in O, etajTx[0][0])
+#         if selection_event == "j-in-o":
+#             event_intervals = get_j_in_topk_intervals(
+#                 intervals,
+#                 top_k_percent=top_k_percent,
+#                 deepsad_c=deepsad_c,
+#                 j=int(j),
+#             )
+#         else:
+#             event_intervals = get_o_equal_oobs_intervals(
+#                 intervals,
+#                 top_k_percent=top_k_percent,
+#                 deepsad_c=deepsad_c,
+#                 O_obs=O,
+#             )
+#         final_intervals = [(left, right, bool(Oz)) for left, right, Oz in event_intervals]
+#         cdf = truncated_cdf(
+#             0,
+#             np.sqrt(etajTsigmaetaj[0][0]),
+#             final_intervals,
+#             True,
+#             etajTx[0][0],
+#         )
 #         if cdf is None:
 #             print(f"Warning: CDF computation failed for seed {seed}. Skipping this run.")
 #             continue
@@ -187,6 +211,7 @@ def run_one(
     reference_size: int = 100,
     source_test_size: int | None = None,
     target_test_size: int | None = None,
+    selection_event: str = "j-in-o",
 ):
     _ = (
         top_k_normal_percent,
@@ -197,6 +222,9 @@ def run_one(
 
     if test_index_class not in {"normal", "anomaly"}:
         raise ValueError("test_index_class must be either 'normal' or 'anomaly'.")
+    selection_event = str(selection_event).strip().lower().replace("_", "-")
+    if selection_event not in {"j-in-o", "o-equal-oobs"}:
+        raise ValueError("selection_event must be either 'j-in-o' or 'o-equal-oobs'.")
     n_total, n_source, n_target = resolve_source_target_test_sizes(
         n,
         source_test_size=source_test_size,
@@ -329,9 +357,14 @@ def run_one(
         else:
             intervals = get_model_intervals_cpu(deepsad_encoder, intervals)
 
-    intervals = get_j_in_topk_intervals_v2(
-        intervals, top_k_percent=top_k_percent, deepsad_c=deepsad_c, j=j_global
-    )
+    if selection_event == "j-in-o":
+        intervals = get_j_in_topk_intervals(
+            intervals, top_k_percent=top_k_percent, deepsad_c=deepsad_c, j=j_global
+        )
+    else:
+        intervals = get_o_equal_oobs_intervals(
+            intervals, top_k_percent=top_k_percent, deepsad_c=deepsad_c, O_obs=O
+        )
     final_intervals = [(left_i, right_i, bool(Oz)) for left_i, right_i, Oz in intervals]
     cdf = truncated_cdf(0, path["sigma"], final_intervals, True, path["test_statistic"])
     if cdf is None:
@@ -340,6 +373,7 @@ def run_one(
     p_value = 2 * min(cdf, 1 - cdf)
     print(f"p-value for seed {seed}: {p_value}")
     return [p_value]
+
 
 def run(
     seed: int,
@@ -361,6 +395,7 @@ def run(
     X_source_obs: np.ndarray = None,
     rho: float = 0.0,
     reference_size: int = 100,
+    selection_event: str = "j-in-o",
 ):
     return run_one(
         seed=seed,
@@ -384,5 +419,5 @@ def run(
         target_rho=rho,
         source_rho=rho,
         reference_size=reference_size,
+        selection_event=selection_event,
     )
-

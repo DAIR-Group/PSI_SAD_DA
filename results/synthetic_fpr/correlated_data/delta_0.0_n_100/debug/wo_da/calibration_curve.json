@@ -1,0 +1,42 @@
+[
+  {
+    "alpha": 0.001,
+    "empirical_rejection": 0.041666666666666664,
+    "conditional_rejection": 0.04807692307692308
+  },
+  {
+    "alpha": 0.005,
+    "empirical_rejection": 0.058333333333333334,
+    "conditional_rejection": 0.0673076923076923
+  },
+  {
+    "alpha": 0.01,
+    "empirical_rejection": 0.06666666666666667,
+    "conditional_rejection": 0.07692307692307693
+  },
+  {
+    "alpha": 0.02,
+    "empirical_rejection": 0.09166666666666666,
+    "conditional_rejection": 0.10576923076923077
+  },
+  {
+    "alpha": 0.05,
+    "empirical_rejection": 0.13333333333333333,
+    "conditional_rejection": 0.15384615384615385
+  },
+  {
+    "alpha": 0.1,
+    "empirical_rejection": 0.20833333333333334,
+    "conditional_rejection": 0.2403846153846154
+  },
+  {
+    "alpha": 0.2,
+    "empirical_rejection": 0.2916666666666667,
+    "conditional_rejection": 0.33653846153846156
+  },
+  {
+    "alpha": 0.5,
+    "empirical_rejection": 0.49166666666666664,
+    "conditional_rejection": 0.5673076923076923
+  }
+]

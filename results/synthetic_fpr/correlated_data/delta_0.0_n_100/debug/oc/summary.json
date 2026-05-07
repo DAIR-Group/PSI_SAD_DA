@@ -7,15 +7,15 @@
   "missing_rate": 0.02,
   "n_rejections": 27,
   "fpr": 0.05510204081632653,
-  "fpr_se": null,
+  "fpr_se": 0.010308091324958194,
   "conditional_fpr": 0.05510204081632653,
-  "conditional_fpr_se": null,
+  "conditional_fpr_se": 0.010308091324958194,
   "rate_denominator": "pvalues",
   "uncertainty_source": "fixed_model_resampling_dependent",
-  "ks_statistic": 0.04940443994245369,
-  "ks_pvalue": 0.17680903483266508,
-  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\oc\\histogram.png",
-  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\oc\\qq_plot.png",
-  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\oc\\calibration_plot.png",
-  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\correlated_data\\delta_0.0_n_100\\debug\\oc\\calibration_curve.json"
+  "ks_statistic": 0.04940443867970157,
+  "ks_pvalue": 0.1768090565701126,
+  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\oc\\histogram.png",
+  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\oc\\qq_plot.png",
+  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\oc\\calibration_plot.png",
+  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\oc\\calibration_curve.json"
 }

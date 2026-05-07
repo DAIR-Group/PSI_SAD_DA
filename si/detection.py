@@ -135,15 +135,20 @@ def get_ad_intervals(intervals, top_k_percent, deepsad_c, eps=1e-10):
 
     return new_intervals
 
-
-def get_ad_intervals_fast(intervals, top_k_percent, deepsad_c, eps=1e-10):
-    return get_ad_intervals(
+def get_o_equal_oobs_intervals(intervals, top_k_percent, deepsad_c, O_obs, eps=1e-10):
+    observed_topk = {int(item) for item in O_obs}
+    ad_intervals = get_ad_intervals(
         intervals=intervals,
         top_k_percent=top_k_percent,
         deepsad_c=deepsad_c,
         eps=eps,
     )
-        
+    return [
+        (left, right, {int(item) for item in Oz} == observed_topk)
+        for left, right, Oz in ad_intervals
+    ]
+
+
 def get_top_k_normal_intervals(intervals, top_k_percent, deepsad_c):
     quad_intervals = []
     for left, right, a, b in intervals:
@@ -251,7 +256,7 @@ def get_j_in_topk_intervals(intervals, top_k_percent, deepsad_c, j):
         n = len(A)
         top_k = max(1, int(top_k_percent * n))
         boundary = n - top_k  # items at rank >= boundary are in top-k
-        
+
         def get_roots_and_signs(i, j):
             da = float(A[i] - A[j])
             db = float(B[i] - B[j])
@@ -286,19 +291,10 @@ def get_j_in_topk_intervals(intervals, top_k_percent, deepsad_c, j):
             for z, sign in z_crossings:
                 if left < z <= right:
                     z_values.append((z, sign))
-        previous = left + 1e-9
+        previous = left
         for z, sign in sorted(z_values):
             new_intervals.append((previous, z, smaller_than_j >= boundary))
             previous = z
             smaller_than_j += sign
         new_intervals.append((previous, right, smaller_than_j >= boundary))
     return new_intervals
-
-
-def get_j_in_topk_intervals_v2(intervals, top_k_percent, deepsad_c, j):
-    return get_j_in_topk_intervals(
-        intervals=intervals,
-        top_k_percent=top_k_percent,
-        deepsad_c=deepsad_c,
-        j=j,
-    )

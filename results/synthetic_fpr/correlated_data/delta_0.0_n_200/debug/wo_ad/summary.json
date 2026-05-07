@@ -1,0 +1,21 @@
+{
+  "method": "wo_ad",
+  "metric_name": "fpr",
+  "n_attempted": 120,
+  "n_pvalues": 99,
+  "n_missing": 21,
+  "missing_rate": 0.175,
+  "n_rejections": 24,
+  "fpr": 0.24242424242424243,
+  "fpr_se": 0.04307085178901221,
+  "conditional_fpr": 0.24242424242424243,
+  "conditional_fpr_se": 0.04307085178901221,
+  "rate_denominator": "pvalues",
+  "uncertainty_source": "fixed_model_resampling_dependent",
+  "ks_statistic": 0.20895031716514745,
+  "ks_pvalue": 0.0002862557318384821,
+  "histogram_path": ".\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_200\\debug\\wo_ad\\histogram.png",
+  "qq_plot_path": ".\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_200\\debug\\wo_ad\\qq_plot.png",
+  "calibration_plot_path": ".\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_200\\debug\\wo_ad\\calibration_plot.png",
+  "calibration_curve_path": ".\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_200\\debug\\wo_ad\\calibration_curve.json"
+}

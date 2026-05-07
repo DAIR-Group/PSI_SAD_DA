@@ -1,1 +1,1 @@
-KS test against uniform distribution: KstestResult(statistic=0.02450778862600872, pvalue=0.9224752792919454, statistic_location=0.4114731654080861, statistic_sign=-1)
+KS test against uniform distribution: KstestResult(statistic=0.024507767491857846, pvalue=0.9224757509904504, statistic_location=0.4114731442739352, statistic_sign=-1)

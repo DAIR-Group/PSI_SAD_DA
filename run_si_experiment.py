@@ -127,6 +127,13 @@ def main():
         default=False,
         help="Find p-values for all test points in top k percent",
     )
+    parser.add_argument(
+        "--selection-event",
+        type=str,
+        default="j-in-o",
+        choices=["j-in-o", "o-equal-oobs"],
+        help="Selection event for the normal/proposed SI method.",
+    )
     args = parser.parse_args()
 
     if args.method == "normal" and args.multiple_testing == False: 
@@ -232,6 +239,8 @@ def main():
         else:
             kwargs["target_mu"] = target_mu
             kwargs["source_mu"] = source_mu
+        if args.method == "normal":
+            kwargs["selection_event"] = args.selection_event
         return kwargs
 
     if seed_mode == "until-target":

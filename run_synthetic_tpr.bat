@@ -161,7 +161,7 @@ python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
   --x-axis delta ^
   --n %N_FIXED% ^
   --delta-list %DELTA_CSV% ^
-  --x-label "Signal strength delta (source=200,target=100)" ^
+  --x-label "Delta" ^
   --alpha %ALPHA% ^
   --metric-name %METRIC_NAME% ^
   --methods proposed,oc,bonferroni ^
@@ -169,6 +169,22 @@ python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
 
 if errorlevel 1 (
   echo Synthetic TPR plotting failed for %EXPERIMENT_NAME%.
+  exit /b 1
+)
+
+python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
+  --results-dir "%RESULTS_DIR%" ^
+  --x-axis delta ^
+  --n %N_FIXED% ^
+  --delta-list %DELTA_CSV% ^
+  --x-label "Delta" ^
+  --alpha %ALPHA% ^
+  --metric-name %METRIC_NAME% ^
+  --methods proposed,oc,bonferroni ^
+  --output "%RESULTS_DIR%\final_tpr_plot.png"
+
+if errorlevel 1 (
+  echo Synthetic TPR PNG plotting failed for %EXPERIMENT_NAME%.
   exit /b 1
 )
 

@@ -1,0 +1,21 @@
+{
+  "method": "wo_j_in_o",
+  "metric_name": "fpr",
+  "n_attempted": 500,
+  "n_pvalues": 490,
+  "n_missing": 10,
+  "missing_rate": 0.02,
+  "n_rejections": 61,
+  "fpr": 0.12448979591836734,
+  "fpr_se": 0.014914182171956576,
+  "conditional_fpr": 0.12448979591836734,
+  "conditional_fpr_se": 0.014914182171956576,
+  "rate_denominator": "pvalues",
+  "uncertainty_source": "fixed_model_resampling_dependent",
+  "ks_statistic": 0.16195171018250187,
+  "ks_pvalue": 1.0712658631379044e-11,
+  "histogram_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\wo_j_in_o\\histogram.png",
+  "qq_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\wo_j_in_o\\qq_plot.png",
+  "calibration_plot_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\wo_j_in_o\\calibration_plot.png",
+  "calibration_curve_path": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\results\\synthetic_fpr\\correlated_data\\delta_0.0_n_100\\debug\\wo_j_in_o\\calibration_curve.json"
+}

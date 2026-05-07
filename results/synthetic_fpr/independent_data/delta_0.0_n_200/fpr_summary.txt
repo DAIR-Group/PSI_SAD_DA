@@ -19,9 +19,10 @@
   "test_index_class": "normal",
   "alpha": 0.05,
   "top_k_percent": 0.05,
+  "selection_event": "j-in-o",
   "device": "cuda",
   "model_name": "deepsad_da_delta2_independent",
-  "model_dir": "c:\\Repository Github\\si_semi_ad_v2\\models",
+  "model_dir": "c:\\Repository Github\\si_semi_ad_v2\\PSI_SAD_DA\\models",
   "covariance_debug": {
     "source": "working_model_artifacts",
     "target_covariance_path": "c:\\Repository Github\\si_semi_ad_v2\\covariances\\deepsad_da_delta2_independent_cov.npy",
@@ -32,8 +33,8 @@
     "source_fallback_used": false,
     "has_source_block": true
   },
-  "elapsed_seconds": 182.11435675621033,
-  "debug_dir": "c:\\Repository Github\\si_semi_ad_v2\\results\\synthetic_fpr_delta2\\independent_data\\delta_0.0_n_200\\debug",
+  "elapsed_seconds": 293.2144799232483,
+  "debug_dir": "results\\synthetic_fpr\\independent_data\\delta_0.0_n_200\\debug",
   "methods": {
     "proposed": {
       "n_attempted": 500,
@@ -42,12 +43,40 @@
       "missing_rate": 0.008,
       "n_rejections": 22,
       "fpr": 0.04435483870967742,
-      "fpr_se": null,
+      "fpr_se": 0.009244384410574652,
       "conditional_fpr": 0.04435483870967742,
-      "conditional_fpr_se": null,
+      "conditional_fpr_se": 0.009244384410574652,
       "rate_denominator": "pvalues",
       "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 129.8599636554718
+      "runtime_seconds": 120.30192804336548
+    },
+    "wo_dnn": {
+      "n_attempted": 500,
+      "n_pvalues": 496,
+      "n_missing": 4,
+      "missing_rate": 0.008,
+      "n_rejections": 29,
+      "fpr": 0.05846774193548387,
+      "fpr_se": 0.01053500932839138,
+      "conditional_fpr": 0.05846774193548387,
+      "conditional_fpr_se": 0.01053500932839138,
+      "rate_denominator": "pvalues",
+      "uncertainty_source": "fixed_model_resampling_dependent",
+      "runtime_seconds": 21.283834218978882
+    },
+    "wo_j_in_o": {
+      "n_attempted": 500,
+      "n_pvalues": 496,
+      "n_missing": 4,
+      "missing_rate": 0.008,
+      "n_rejections": 44,
+      "fpr": 0.08870967741935484,
+      "fpr_se": 0.012766535020689584,
+      "conditional_fpr": 0.08870967741935484,
+      "conditional_fpr_se": 0.012766535020689584,
+      "rate_denominator": "pvalues",
+      "uncertainty_source": "fixed_model_resampling_dependent",
+      "runtime_seconds": 104.681405544281
     },
     "oc": {
       "n_attempted": 500,
@@ -56,12 +85,12 @@
       "missing_rate": 0.008,
       "n_rejections": 26,
       "fpr": 0.05241935483870968,
-      "fpr_se": null,
+      "fpr_se": 0.010007211721831952,
       "conditional_fpr": 0.05241935483870968,
-      "conditional_fpr_se": null,
+      "conditional_fpr_se": 0.010007211721831952,
       "rate_denominator": "pvalues",
       "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 44.4104905128479
+      "runtime_seconds": 40.12721824645996
     },
     "bonferroni": {
       "n_attempted": 500,
@@ -70,12 +99,12 @@
       "missing_rate": 0.008,
       "n_rejections": 0,
       "fpr": 0.0,
-      "fpr_se": null,
+      "fpr_se": 0.0,
       "conditional_fpr": 0.0,
-      "conditional_fpr_se": null,
+      "conditional_fpr_se": 0.0,
       "rate_denominator": "pvalues",
       "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 3.0081188678741455
+      "runtime_seconds": 1.639756202697754
     },
     "naive": {
       "n_attempted": 500,
@@ -84,12 +113,12 @@
       "missing_rate": 0.008,
       "n_rejections": 486,
       "fpr": 0.9798387096774194,
-      "fpr_se": null,
+      "fpr_se": 0.006310962795123255,
       "conditional_fpr": 0.9798387096774194,
-      "conditional_fpr_se": null,
+      "conditional_fpr_se": 0.006310962795123255,
       "rate_denominator": "pvalues",
       "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 2.9183690547943115
+      "runtime_seconds": 2.5420522689819336
     },
     "no_inference": {
       "n_attempted": 500,
@@ -98,12 +127,40 @@
       "missing_rate": 0.008,
       "n_rejections": 496,
       "fpr": 1.0,
-      "fpr_se": null,
+      "fpr_se": 0.0,
       "conditional_fpr": 1.0,
-      "conditional_fpr_se": null,
+      "conditional_fpr_se": 0.0,
       "rate_denominator": "pvalues",
       "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 1.899721622467041
+      "runtime_seconds": 1.6135382652282715
+    },
+    "wo_ad": {
+      "n_attempted": 120,
+      "n_pvalues": 104,
+      "n_missing": 16,
+      "missing_rate": 0.13333333333333333,
+      "n_rejections": 4,
+      "fpr": 0.038461538461538464,
+      "fpr_se": 0.018857320686363848,
+      "conditional_fpr": 0.038461538461538464,
+      "conditional_fpr_se": 0.018857320686363848,
+      "rate_denominator": "pvalues",
+      "uncertainty_source": "fixed_model_resampling_dependent",
+      "runtime_seconds": 10.595375537872314
+    },
+    "wo_da": {
+      "n_attempted": 120,
+      "n_pvalues": 104,
+      "n_missing": 16,
+      "missing_rate": 0.13333333333333333,
+      "n_rejections": 2,
+      "fpr": 0.019230769230769232,
+      "fpr_se": 0.013466820603574795,
+      "conditional_fpr": 0.019230769230769232,
+      "conditional_fpr_se": 0.013466820603574795,
+      "rate_denominator": "pvalues",
+      "uncertainty_source": "fixed_model_resampling_dependent",
+      "runtime_seconds": 11.153352737426758
     }
   }
 }
