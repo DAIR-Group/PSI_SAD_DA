@@ -29,23 +29,7 @@ pip install -r requirements.txt
 ### Required Artifacts
 
 To reproduce the existing synthetic results without retraining the models, keep
-the following files:
-
-```text
-models/deepsad_da_delta2_independent_model.pth
-models/deepsad_da_delta2_independent_c.pth
-models/deepsad_da_delta2_independent_metadata.json
-models/deepsad_da_delta2_independent_source.npy
-covariances/deepsad_da_delta2_independent_cov.npy
-covariances/deepsad_da_delta2_independent_source_cov.npy
-
-models/deepsad_da_delta2_correlated_model.pth
-models/deepsad_da_delta2_correlated_c.pth
-models/deepsad_da_delta2_correlated_metadata.json
-models/deepsad_da_delta2_correlated_source.npy
-covariances/deepsad_da_delta2_correlated_cov.npy
-covariances/deepsad_da_delta2_correlated_source_cov.npy
-```
+the following files in /models, /covariances.
 
 
 ### Synthetic FPR
