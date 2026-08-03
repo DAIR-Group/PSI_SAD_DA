@@ -137,11 +137,14 @@ def load_working_model_artifacts(
     def resolve_artifact_path(path: str | None) -> str | None:
         if path is None:
             return None
-        if os.path.isabs(path):
-            return path
         if os.path.exists(path):
             return path
-        return os.path.join(base_dir, path)
+        parts = path.replace("\\", "/").split("/")
+        if len(parts) >= 2:
+            local = os.path.join(base_dir, *parts[-2:])
+            if os.path.exists(local):
+                return local
+        return path
 
     target_covariance_path = resolve_artifact_path(
         metadata.get("target_covariance_path") or metadata.get("covariance_path")
