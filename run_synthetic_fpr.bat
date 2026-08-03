@@ -59,8 +59,8 @@ call :run_experiment correlated 0.5 "%CORRELATED_MODEL_NAME%" "%CORRELATED_RESUL
 if errorlevel 1 exit /b 1
 
 echo All synthetic FPR experiments completed.
-echo Independent figure: "%INDEPENDENT_RESULTS_DIR%\final_fpr_plot.pdf"
-echo Correlated figure: "%CORRELATED_RESULTS_DIR%\final_fpr_plot.pdf"
+echo Independent figure: "%INDEPENDENT_RESULTS_DIR%\final_independent_fpr_plot.pdf"
+echo Correlated figure: "%CORRELATED_RESULTS_DIR%\final_correlated_fpr_plot.pdf"
 endlocal
 exit /b 0
 
@@ -94,7 +94,6 @@ python "%SCRIPT_DIR%train.py" ^
   --anomaly-rate %TRAIN_ANOMALY_RATE% ^
   --known-label-rate %KNOWN_LABEL_RATE% ^
   --rho %RHO% ^
-  --n-reference %REFERENCE_SIZE% ^
   --h-dims %H_DIMS% ^
   --rep-dim %REP_DIM% ^
   --ae-epochs %AE_EPOCHS% ^
@@ -164,7 +163,7 @@ python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
   --alpha %ALPHA% ^
   --metric-name %METRIC_NAME% ^
   --methods proposed,wo_ad,wo_da,oc,bonferroni,naive ^
-  --output "%RESULTS_DIR%\final_fpr_plot.pdf"
+  --output "%RESULTS_DIR%\final_%EXPERIMENT_NAME%_fpr_plot.pdf"
 
 if errorlevel 1 (
   echo Synthetic FPR plotting failed for %EXPERIMENT_NAME%.
@@ -180,7 +179,7 @@ python "%SCRIPT_DIR%scripts\plot_synthetic_rate.py" ^
   --alpha %ALPHA% ^
   --metric-name %METRIC_NAME% ^
   --methods proposed,wo_ad,wo_da,oc,bonferroni,naive ^
-  --output "%RESULTS_DIR%\final_fpr_plot.png"
+  --output "%RESULTS_DIR%\final_%EXPERIMENT_NAME%_fpr_plot.png"
 
 if errorlevel 1 (
   echo Synthetic FPR PNG plotting failed for %EXPERIMENT_NAME%.

@@ -21,7 +21,7 @@ Create a fresh Python environment and install the pinned dependencies:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\activate
+.\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
@@ -50,10 +50,10 @@ results/synthetic_fpr/correlated_data/
 The final figures are:
 
 ```text
-results/synthetic_fpr/independent_data/final_fpr_plot.pdf
-results/synthetic_fpr/independent_data/final_fpr_plot.png
-results/synthetic_fpr/correlated_data/final_fpr_plot.pdf
-results/synthetic_fpr/correlated_data/final_fpr_plot.png
+results/synthetic_fpr/independent_data/final_independent_fpr_plot.pdf
+results/synthetic_fpr/independent_data/final_independent_fpr_plot.png
+results/synthetic_fpr/correlated_data/final_correlated_fpr_plot.pdf
+results/synthetic_fpr/correlated_data/final_correlated_fpr_plot.png
 ```
 
 ### Synthetic TPR
@@ -76,8 +76,14 @@ results/synthetic_tpr/correlated_data/
 The final figures are:
 
 ```text
-results/synthetic_tpr/independent_data/final_tpr_plot.pdf
-results/synthetic_tpr/independent_data/final_tpr_plot.png
-results/synthetic_tpr/correlated_data/final_tpr_plot.pdf
-results/synthetic_tpr/correlated_data/final_tpr_plot.png
+results/synthetic_tpr/independent_data/final_tpr_independent_plot.pdf
+results/synthetic_tpr/independent_data/final_tpr_independent_plot.png
+results/synthetic_tpr/correlated_data/final_tpr_correlated_plot.pdf
+results/synthetic_tpr/correlated_data/final_tpr_correlated_plot.png
 ```
+
+## Example Notebooks
+
+We provide several Jupyter Notebooks that how to use code in project in our /examples directory:
++ ex1_pvalue.ipynb: Example for computing p-value
++ ex2_pivot.ipynb: Check the uniformity of the pivot.

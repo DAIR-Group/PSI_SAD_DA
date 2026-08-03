@@ -132,7 +132,6 @@ def build_synthetic_source_target_split(
     anomaly_rate: float,
     known_label_rate: float,
     rho: float,
-    n_reference: int,
     seed: int | None,
     source_n: int | None = None,
     source_mean_shift: float = 0.5,
@@ -567,7 +566,6 @@ def train(args):
     y_source = None
 
     base_seed = None if args.seed is None else int(args.seed)
-    n_reference = args.n if args.n_reference is None else int(args.n_reference)
     (
         Xt,
         true_yt,
@@ -585,7 +583,6 @@ def train(args):
         anomaly_rate=args.anomaly_rate,
         known_label_rate=args.known_label_rate,
         rho=args.rho if args.target_rho is None else args.target_rho,
-        n_reference=n_reference,
         seed=base_seed,
         source_n=args.source_n,
         source_mean_shift=args.source_mean_shift,
@@ -802,12 +799,6 @@ def main():
     parser.add_argument("--sad-epochs", type=int, default=10)
     parser.add_argument("--lr", type=float, default=0.001)
     parser.add_argument("--n-test", type=int, default=100)
-    parser.add_argument(
-        "--n-reference",
-        type=int,
-        default=None,
-        help="Deprecated for synthetic training; target reference is generated only during SI/testing.",
-    )
     parser.add_argument("--model-dir", type=str, default="models")
     parser.add_argument(
         "--covariance-dir",

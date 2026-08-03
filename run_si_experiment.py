@@ -122,12 +122,6 @@ def main():
         help="If set and --seed is omitted, keep increasing seeds from 0 until this many accepted p-values are collected.",
     )
     parser.add_argument(
-        "--multiple-testing",
-        type=bool,
-        default=False,
-        help="Find p-values for all test points in top k percent",
-    )
-    parser.add_argument(
         "--selection-event",
         type=str,
         default="j-in-o",
@@ -136,10 +130,8 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.method == "normal" and args.multiple_testing == False: 
+    if args.method == "normal":
         from si.run import run_one as run_fn
-    elif args.method == "normal" and args.multiple_testing == True:
-        from si.run import run_all as run_fn
     elif args.method == "oc":
         from si.run_oc import run as run_fn
     elif args.method in {"bonferonni", "bonferroni"}:
@@ -234,11 +226,8 @@ def main():
             "test_index_class": args.test_index_class,
             "Sigma": Sigma,
         }
-        if args.method == "normal" and args.multiple_testing:
-            kwargs["mu"] = target_mu
-        else:
-            kwargs["target_mu"] = target_mu
-            kwargs["source_mu"] = source_mu
+        kwargs["target_mu"] = target_mu
+        kwargs["source_mu"] = source_mu
         if args.method == "normal":
             kwargs["selection_event"] = args.selection_event
         return kwargs

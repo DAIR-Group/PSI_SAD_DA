@@ -50,34 +50,6 @@
       "uncertainty_source": "fixed_model_resampling_dependent",
       "runtime_seconds": 127.58098983764648
     },
-    "wo_dnn": {
-      "n_attempted": 500,
-      "n_pvalues": 495,
-      "n_missing": 5,
-      "missing_rate": 0.01,
-      "n_rejections": 28,
-      "fpr": 0.05656565656565657,
-      "fpr_se": 0.01038316265854696,
-      "conditional_fpr": 0.05656565656565657,
-      "conditional_fpr_se": 0.01038316265854696,
-      "rate_denominator": "pvalues",
-      "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 24.82362985610962
-    },
-    "wo_j_in_o": {
-      "n_attempted": 500,
-      "n_pvalues": 495,
-      "n_missing": 5,
-      "missing_rate": 0.01,
-      "n_rejections": 43,
-      "fpr": 0.08686868686868687,
-      "fpr_se": 0.012658890604398758,
-      "conditional_fpr": 0.08686868686868687,
-      "conditional_fpr_se": 0.012658890604398758,
-      "rate_denominator": "pvalues",
-      "uncertainty_source": "fixed_model_resampling_dependent",
-      "runtime_seconds": 106.62050294876099
-    },
     "oc": {
       "n_attempted": 500,
       "n_pvalues": 495,
