@@ -13,7 +13,7 @@ two saved DA-DeepSAD models:
 - `deepsad_da_delta2_independent`: independent Gaussian synthetic data
   (`rho=0.0`)
 - `deepsad_da_delta2_correlated`: AR(1)-correlated Gaussian synthetic data
-  (`rho=0.5`)
+  (`rho=0.9`)
 
 ### Environment
 
